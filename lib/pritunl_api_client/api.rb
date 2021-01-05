@@ -94,7 +94,6 @@ module PritunlApiClient
       auth_timestamp = Time.now.to_i
       auth_nonce = SecureRandom.hex( 16 )
       auth_string = [@api_token, auth_timestamp, auth_nonce, method, path]
-      auth_string << JSON.generate( params, space: ' ' ) if params
       auth_string = auth_string.join( '&' )
       digest = OpenSSL::Digest.new( 'sha256' )
       hmac = OpenSSL::HMAC.digest( digest, @api_secret, auth_string )
